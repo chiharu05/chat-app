@@ -16,13 +16,8 @@ class MessagesController < ApplicationController
     end
   end
 
-  # このクラスでしか呼び出せないメソッド(private)
   private
-  # サーバーの外部から、リクエストに含まれてきた情報を格納したものとは「def params end」
   def message_params
-    # 送信されたパラメーターの情報を持つparamsから、どの情報を取得したいか指定「params.require」
-    # 取得したい情報から、指定したキーとセットになる値のみ取得「params.require(:モデル名).permit(:キー名)」 
-    # ハッシュを結合させる「merge」
     params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
   end
 end
